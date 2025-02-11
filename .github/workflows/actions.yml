@@ -3,7 +3,7 @@ name: run main.py
 on:
   schedule:
     # - cron: '0 0 * * 1' # At 00:00 on Monday
-    - cron: '30 10,12,15 * * *' # 每天中午12点 ------ +8时区 ------
+    - cron: '30 4,8,12 * * *' # 每天中午12点 ------ +8时区 ------
 
 jobs:
   build:
