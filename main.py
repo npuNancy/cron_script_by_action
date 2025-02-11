@@ -22,18 +22,23 @@ def send_msg():
     try:
         SOME_SECRET = os.environ["SOME_SECRET"]
     except KeyError:
-        logger.error("SOME_SECRET not found in environment variables")
+        logger.error("SOME_SECRET 未设置")
         return
     
     try:
         url = "http://www.pushplus.plus/send"
         body = SOME_SECRET.encode(encoding="utf-8")
         headers = {"Content-Type": "application/json"}
-        requests.post(url, data=body, headers=headers)
-        logger.info("Message sent successfully")
+        res = requests.post(url, data=body, headers=headers)
+
+        if res.status_code == 200:
+            logger.info("√ 用户消息推送成功！")
+        else:
+            logger.error(f"X 推送消息提醒失败！")
+
     except Exception as e:
-        logger.error(f"Error sending message: {e}")
+        logger.error(f"错误: {e}")
 
 if __name__ == "__main__":
-    logger.info(f"Starting script")
+    logger.info(f"开始执行脚本")
     send_msg()
