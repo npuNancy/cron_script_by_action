@@ -1,6 +1,7 @@
+import os
+import json
 import logging
 import logging.handlers
-import os
 
 import requests
 
@@ -16,19 +17,23 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
-try:
-    SOME_SECRET = os.environ["SOME_SECRET"]
-except KeyError:
-    SOME_SECRET = "Token not available!"
-    #logger.info("Token not available!")
-    #raise
 
+def send_msg():
+    try:
+        SOME_SECRET = os.environ["SOME_SECRET"]
+    except KeyError:
+        logger.error("SOME_SECRET not found in environment variables")
+        return
+    
+    try:
+        url = "http://www.pushplus.plus/send"
+        body = SOME_SECRET.encode(encoding="utf-8")
+        headers = {"Content-Type": "application/json"}
+        requests.post(url, data=body, headers=headers)
+        logger.info("Message sent successfully")
+    except Exception as e:
+        logger.error(f"Error sending message: {e}")
 
 if __name__ == "__main__":
-    logger.info(f"Token value: {SOME_SECRET}")
-
-    r = requests.get('https://weather.talkpython.fm/api/weather/?city=Berlin&country=DE')
-    if r.status_code == 200:
-        data = r.json()
-        temperature = data["forecast"]["temp"]
-        logger.info(f'Weather in Berlin: {temperature}')
+    logger.info(f"Starting script")
+    send_msg()
