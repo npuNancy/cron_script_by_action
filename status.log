@@ -2387,3 +2387,5 @@
 2026-03-15 09:04:07,171 - __main__ - ERROR - 错误: HTTPConnectionPool(host='www.pushplus.plus', port=80): Max retries exceeded with url: /send (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5ad2a5bf10>: Failed to establish a new connection: [Errno 110] Connection timed out'))
 2026-03-15 13:29:56,579 - __main__ - INFO - 开始执行脚本
 2026-03-15 13:29:57,586 - __main__ - INFO - √ 用户消息推送成功！
+2026-03-16 06:06:15,755 - __main__ - INFO - 开始执行脚本
+2026-03-16 06:06:16,728 - __main__ - INFO - √ 用户消息推送成功！
